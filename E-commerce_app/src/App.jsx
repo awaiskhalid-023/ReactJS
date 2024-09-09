@@ -1,0 +1,46 @@
+import {Route,Routes} from 'react-router-dom'
+import './App.css'
+import Navbar from './components/Navbar'
+import Header from './components/Header/Header'
+/* import HomePage from './pages/Home'
+import Product from './pages/Product'
+import About from './pages/About'
+import Collection from './pages/Collection'
+import Orders from './pages/Orders'
+import PlaceOrder from './pages/PlaceOrder'
+import Cart from './pages/Cart'
+import Contact from './pages/Contact'
+import Login from './pages/Login' */
+import index from '.'
+
+function App() {
+  return (
+    <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+      <Navbar/>
+      <Header/>
+      <Routes>
+        {/* <Route path='/' element={<HomePage/>} />
+        <Route path='/about' element={<About/>} />
+        <Route path='/collection' element={<Collection/>} />
+        <Route path='/product' element={<Product/>} />
+        <Route path='/contact' element={<Contact/>} />
+        <Route path='/placeholder' element={<PlaceOrder/>} />
+        <Route path='/orders' element={<Orders/>} />
+        <Route path='/cart' element={<Cart/>} />
+        <Route path='/login' element={<Login/>} /> */}
+
+        <Route path='/' element={<index.HomePage/>} />
+        <Route path='/about' element={<index.About/>} />
+        <Route path='/collection' element={<index.Collection/>} />
+        <Route path='/product' element={<index.Product/>} />
+        <Route path='/contact' element={<index.Contact/>} />
+        <Route path='/placeholder' element={<index.PlaceOrder/>} />
+        <Route path='/orders' element={<index.Orders/>} />
+        <Route path='/cart' element={<index.Cart/>} />
+        <Route path='/login' element={<index.Login/>} />
+      </Routes>
+    </div>
+  )
+}
+
+export default App
