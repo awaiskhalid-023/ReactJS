@@ -1,7 +1,8 @@
 import {Route,Routes} from 'react-router-dom'
 import './App.css'
 import Navbar from './components/Navbar'
-import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
+
 /* import HomePage from './pages/Home'
 import Product from './pages/Product'
 import About from './pages/About'
@@ -10,14 +11,14 @@ import Orders from './pages/Orders'
 import PlaceOrder from './pages/PlaceOrder'
 import Cart from './pages/Cart'
 import Contact from './pages/Contact'
-import Login from './pages/Login' */
+import Login from './pages/Login' 
+import Header from './components/Header/Header'  */
 import index from '.'
 
 function App() {
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
       <Navbar/>
-      <Header/>
       <Routes>
         {/* <Route path='/' element={<HomePage/>} />
         <Route path='/about' element={<About/>} />
@@ -39,6 +40,7 @@ function App() {
         <Route path='/cart' element={<index.Cart/>} />
         <Route path='/login' element={<index.Login/>} />
       </Routes>
+      <Footer/>
     </div>
   )
 }

@@ -1,20 +1,23 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import { products } from '../assets/assets'
 
 export const shopContext= React.createContext()
 
-const shopContextProvider= (props)=>{
-    const currency='Rs.';
+const ShopContextProvider= (props)=>{
+    const currency='$';
     const delivery_charges=150;
-    const value={
-        products, currency, delivery_charges
-    }
+    const contextValue = useMemo(() => ({
+        products,
+        currency,
+        delivery_charges
+      }));
+    console.log(products)
     return(
-        <shopContext.Provider value={value}>
+        <shopContext.Provider value={contextValue}>
             {props.children}
         </shopContext.Provider>
     )
 }
-export default shopContextProvider;
+export default ShopContextProvider;
 
 
