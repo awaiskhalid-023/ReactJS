@@ -11,9 +11,9 @@ const LatestCollection = () => {
             setLatestProducts(products.slice(0,10))
         },[])
       
-        console.log('Products:', products);
+/*         console.log('Products:', products);
         console.log('Currency:', currency);
-        console.log('Delivery Charges:', delivery_charges);
+        console.log('Delivery Charges:', delivery_charges); */
     return (
         <div className='my-10'>
             <div className='text-center py-8 text-3xl'>

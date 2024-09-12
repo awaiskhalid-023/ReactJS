@@ -14,11 +14,13 @@ import Contact from './pages/Contact'
 import Login from './pages/Login' 
 import Header from './components/Header/Header'  */
 import index from '.'
+import SearchBar from './components/SearchBar'
 
 function App() {
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
       <Navbar/>
+      <SearchBar/>
       <Routes>
         {/* <Route path='/' element={<HomePage/>} />
         <Route path='/about' element={<About/>} />
@@ -33,7 +35,7 @@ function App() {
         <Route path='/' element={<index.HomePage/>} />
         <Route path='/about' element={<index.About/>} />
         <Route path='/collection' element={<index.Collection/>} />
-        <Route path='/product' element={<index.Product/>} />
+        <Route path='/product/:productId' element={<index.Product/>} />
         <Route path='/contact' element={<index.Contact/>} />
         <Route path='/placeholder' element={<index.PlaceOrder/>} />
         <Route path='/orders' element={<index.Orders/>} />

@@ -5,10 +5,65 @@ import Title from '../components/Title'
 import ProductItems from '../components/ProductItems'
 
 function Collection() {
-    const {products} = useContext(shopContext)
+    const {products, search, showSearch} = useContext(shopContext)
     const [showFilter,setShowFilter] = useState(false)
     const [filterProducts,setFilterProducts] = useState([])
-    useEffect(()=>(setFilterProducts(products)),[])
+    const [category,setCategory]=useState([])
+    const [subCategory,setSubCategory] = useState ([])
+    const [sortType,setSortType] = useState('relavent')
+
+    const toggleCategory=(e)=>{
+        if (category.includes(e.target.value)) {
+            setCategory (prev => prev.filter (item => item !== e.target.value))
+        } else {
+            setCategory(prev=>[...prev, e.target.value])
+        }
+    }
+    const toggleSubCategory=(e)=>{
+        if (subCategory.includes(e.target.value)) {
+            setSubCategory (prev => prev.filter (item => item !== e.target.value))
+        } else {
+            setSubCategory(prev=>[...prev, e.target.value])
+        }
+    }
+
+    const applyFilter = ()=>{
+        let productsCopy= products.slice()
+        if (showSearch && search) {
+            productsCopy=productsCopy.filter(item=> item.name.toLowerCase().includes(search.toLowerCase()))
+        }
+        if (category.length>0) {
+            productsCopy=productsCopy.filter(item => category.includes(item.category))
+        }
+        if (subCategory.length>0) {
+            productsCopy=productsCopy.filter(item => subCategory.includes(item.subCategory))
+        }
+        setFilterProducts(productsCopy)
+    }
+    const sortProducts= ()=>{
+        let filterProductsCopy = filterProducts.slice()
+
+        switch (sortType) {
+            case 'low-high':
+                setFilterProducts(filterProductsCopy.sort((a,b)=>(a.price-b.price)))
+                break;
+            case 'high-low':
+                setFilterProducts(filterProductsCopy.sort((a,b)=>(b.price-a.price)))
+                break;
+        
+            default:
+                applyFilter();
+                break;
+        }
+    }
+    useEffect(()=>(applyFilter()),[category,subCategory,search,showSearch])
+    useEffect(()=>(sortProducts()),[sortType])
+
+/*      useEffect(()=>{console.log(category);
+    },[category])
+
+    useEffect(()=>{console.log(subCategory);
+    },[subCategory]) */
 
     return (
         <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
@@ -24,13 +79,13 @@ function Collection() {
                     <p className='mb-3 font-medium text-sm'>CATEGORIES</p>
                     <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
                         <p className='flex gap-2'>
-                            <input className='w-3' type="checkbox" value={'Men'} />Men
+                            <input className='w-3' type="checkbox" value={'Men'} onChange={toggleCategory} />Men
                         </p>
                         <p className='flex gap-2'>
-                            <input className='w-3' type="checkbox" value={'Women'} />Women
+                            <input className='w-3' type="checkbox" value={'Women'} onChange={toggleCategory} />Women
                         </p>
                         <p className='flex gap-2'>
-                            <input className='w-3' type="checkbox" value={'Kids'} />Kids
+                            <input className='w-3' type="checkbox" value={'Kids'} onChange={toggleCategory} />Kids
                         </p>
                     </div>
                 </div>
@@ -39,13 +94,13 @@ function Collection() {
                     <p className='mb-3 font-medium text-sm'>CATEGORIES</p>
                     <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
                         <p className='flex gap-2'>
-                            <input className='w-3' type="checkbox" value={'Tops'} />Tops
+                            <input className='w-3' type="checkbox" value={'Tops'} onChange={toggleSubCategory} />Tops
                         </p>
                         <p className='flex gap-2'>
-                            <input className='w-3' type="checkbox" value={'Bottoms'} />Bottoms
+                            <input className='w-3' type="checkbox" value={'Bottoms'} onChange={toggleSubCategory} />Bottoms
                         </p>
                         <p className='flex gap-2'>
-                            <input className='w-3' type="checkbox" value={'Winters'} />Winters
+                            <input className='w-3' type="checkbox" value={'Winters'} onChange={toggleSubCategory} />Winters
                         </p>
                     </div>
                 </div>
@@ -56,7 +111,7 @@ function Collection() {
                 <div className='flex justify-between text-base sm:text-2xl mb-4'>
                     <Title text1={'ALL'} text2={'COLLECTIONS'}/>
                     {/* ..... Product Sort ..... */}
-                    <select className='border-2 border-gray-200 text-sm px-2'>
+                    <select onChange={(e)=>setSortType(e.target.value)} className='border-2 border-gray-200 text-sm px-2'>
                         <option value="relavent"> Sort by: Relavent</option>
                         <option value="low-high"> Sort by: Low to High</option>
                         <option value="high-low"> Sort by: High to Low</option>
@@ -75,6 +130,7 @@ function Collection() {
            
         </div>
     )
+
 }
 
 export default Collection
