@@ -59,11 +59,6 @@ function Collection() {
     useEffect(()=>(applyFilter()),[category,subCategory,search,showSearch])
     useEffect(()=>(sortProducts()),[sortType])
 
-/*      useEffect(()=>{console.log(category);
-    },[category])
-
-    useEffect(()=>{console.log(subCategory);
-    },[subCategory]) */
 
     return (
         <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
@@ -91,7 +86,7 @@ function Collection() {
                 </div>
                 {/* ..... Sub-Category Filter ..... */}
                 <div className={`border border-gray-300 pl-5 py-3 my-5 ${showFilter ? '' : 'hidden'} sm:block`}>
-                    <p className='mb-3 font-medium text-sm'>CATEGORIES</p>
+                    <p className='mb-3 font-medium text-sm'>SUB CATEGORIES</p>
                     <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
                         <p className='flex gap-2'>
                             <input className='w-3' type="checkbox" value={'Tops'} onChange={toggleSubCategory} />Tops
